@@ -37,7 +37,9 @@ function videoJsciiCovert(){
 			el: document.getElementById('jscii-element-video')
         });
 }
-
+var type1 = 'video/webm; codecs="vp8, vorbis"';
+var type2 = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
+var type3 = 'video/ogg; codecs="theora, vorbis"';
 ////20200304讀取上傳圖片 || Folder檔案
 var nowLoadFile ="";
 var nowLoadFileType ="";
@@ -45,9 +47,11 @@ function filecheck(FileURL){
     nowLoadFileType = FileURL.value.split('.').pop();
     ///alert(FileURL.value.split('.').pop());
     if(nowLoadFileType == 'png' || nowLoadFileType == 'jpg' || nowLoadFileType == 'jpeg'){////檢測檔案格式(圖片)
+        document.getElementById('videoSet').innerHTML= "";
         document.getElementById('picSet').innerHTML = '<img width="150" id="jscii-element-image" src="'+window.URL.createObjectURL(FileURL.files[0])+'" style="display:none"><pre id="ascii-container-image" style="background-color: white;"></pre>';
         imgJsciiCovert();
     }else if(nowLoadFileType == 'mp4' || nowLoadFileType == 'ogg'){////檢測檔案格式(圖片)
+        document.getElementById('picSet').innerHTML= "";
         document.getElementById('videoSet').innerHTML = document.getElementById('videoSet').innerHTML = '<video id="jscii-element-video" width="5" style="position: absolute;"  muted="true" controls autoplay loop><source src="'+window.URL.createObjectURL(FileURL.files[0])+'" type='+"'"+type1+"'"+' /><source src="'+window.URL.createObjectURL(FileURL.files[0])+'" type='+"'"+type2+"'"+' /><source src="'+window.URL.createObjectURL(FileURL.files[0])+'" type='+"'"+type3+"'"+' />Your browser does not support video</video><div></div><pre id="ascii-container-video" style="background-color: white;"></pre>';
         videoJsciiCovert();
     }    
