@@ -12,6 +12,7 @@
                 <br>jscii-element-video 為要被轉換的圖片 (video格式)，ascii-container-video為輸出的結果 (pre格式)</p>
                 <p>當前版本已針對目前瀏覽器版本做優化及改良，原先的彩色功能考量到實際轉化效能過低因此未開放使用，
                 <br>需要的話請將color: true,註解拿掉即可。</p>
+                <p><strong>想測試功能的話，可至<a href="https://akakaze.idv.tw/WebCoding/">官網</a> 試試。</strong></p>
             </div>
         </div>
     </div>
