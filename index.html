@@ -17,7 +17,14 @@
 
         </style>
         <!-- jscii-master：圖像辨識/轉換 -->
-        <script src="jscii.js"></script>
+        <script src="Ascii-worker.js"></script>
+        <script src="js/jscii.js"></script>
+        <!-- html2img：文字轉圖片生成建置 -->
+        <script type="text/javascript" src="js/html2canvas.js"></script>
+        <script type="text/javascript" src="js/canvas2image.js"></script>
+        <script type="text/javascript" src="js/base64.js"></script>
+        <!-- gif.js：gif生成建置 -->
+        <script type="text/javascript" src="js/gif.js"></script>
         <!-- 主js -->
         <script src="index.js"></script>
   </head>
@@ -30,32 +37,22 @@
             <div class="column">
                 <pre style="background-color: black;color: white;height: 500px;overflow: auto;">
 ///////HTML///////////////////
-< img width="150" id="jscii-element-image" src="''" style="display:none" >
-< pre id="ascii-container-image" style="background-color: white;" >< / pre >
-
+< input type="file" id="ex_fileToUpload" onchange="filecheck(this)">  
+< div id='AsciiSet' class="section clearfix" >< /div>
 ///////JS///////////////////
-function imgJsciiCovert(){ ///img轉換
-    document.getElementById('ascii-container-image').style.font = 'bold 10px/3px monospace; color: #000; clear: left;width : fit-content;';
-    let imgJscii = new Jscii({
-        width: document.getElementById('jscii-element-image').style.width,
-        ////color: true,
-        el: document.getElementById('jscii-element-image'),
-        fn: function(str) {
-            document.getElementById('ascii-container-image').innerHTML = str;
-            //////////20200321 新增Ascii轉圖片
-            htmlToCanvas(document.getElementById('ascii-container-image'));
-        }
-    });                       
+function filecheck(FileURL){
+    JsciiCovert(FileURL,'AsciiSet');
 }
-function videoJsciiCovert(){ ///影片轉換
-    document.getElementById('ascii-container-video').style.font = 'bold 8px/6px monospace; color: #000; clear: left;width : fit-content;';
-    let videoJscii = new Jscii({
-        ////color: true,
-        height: document.getElementById('jscii-element-video').style.width,
-        container: document.getElementById('ascii-container-video'),
-        el: document.getElementById('jscii-element-video')
-    });
-}
+
+
+
+
+                                < 說明 >
+----只要直接輸入file及位置就會直接顯示----
+          
+            JsciiCovert  (    file   ,   div    )  ; 
+
+
                  </pre>
                 </div>
             
@@ -65,10 +62,18 @@ function videoJsciiCovert(){ ///影片轉換
                         <i class="unhide icon"></i>
                         上傳
                     </button>
-                    <input type="file" id="ex_fileToUpload" style='display:none' onchange="filecheck(this)">
+                    <button id="GIFcreatBTN" class="ts button" onclick="creatAsciiGIF();" style="display: none;">
+                        <i class="creat icon"></i>
+                        生成GIF
+                    </button>
+                    <input type="file" id="ex_fileToUpload" style='display:none' onchange="filecheck(this)">                    
                 </div>
-                <div id='picSet' class="section clearfix" ></div>
-                <div id='videoSet' class="section clearfix" ></div>
+                <br>
+                <img class="ts image" style="width: 300px;height:315px;display: none;" id="Ascii_image" >
+                <img class="ts image" style="width: 300px;height:315px;display: none" id="Ascii_End_image" >
+                <br>
+                <div id='AsciiSet' class="section clearfix" ></div>
+
             </div>
         </div>
     </div>
@@ -83,8 +88,7 @@ function videoJsciiCovert(){ ///影片轉換
                 <div class="ts huge dividing header">Ascii轉換</div>
                 <!-- / 標題 -->
                 <p>改寫自<strong><a href="https://github.com/EnotionZ/jscii">EnotionZ</a>的jscii套件</strong></p>
-                <p>jscii-element-image為要被轉換的圖片 (img格式) ，ascii-container-image為輸出的結果 (pre格式)
-                <br>jscii-element-video 為要被轉換的圖片 (video格式)，ascii-container-video為輸出的結果 (pre格式)</p>
+                <p>新增的Ascii匯出GIF功能則是參照<strong><a href="https://github.com/imgss/gif_rain_code">imgss</a>的gif.js生成範例</strong></p>
                 <p>當前版本已針對目前瀏覽器版本做優化及改良，原先的彩色功能考量到實際轉化效能過低因此未開放使用，
                 <br>需要的話請將color: true,註解拿掉即可。</p>
                 <p><strong>若這邊不夠清晰，可至<a href="https://github.com/city8208/AsciiJS">Github</a> 觀看。</strong></p>
